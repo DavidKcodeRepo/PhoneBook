@@ -36,7 +36,7 @@ public class PhoneBookController : ControllerBase
 	}
 
 	//PUT: api/PhoneEntires/5
-	[HttpPut("id")]
+	[HttpPut("{id}")]
 	public async Task<IActionResult> PutPhoneEntry(int id, PhoneBookEntry phoneBookEntry)
 	{
 		if (id != phoneBookEntry.PhoneBookEntryId) { BadRequest(); }

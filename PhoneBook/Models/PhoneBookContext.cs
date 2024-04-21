@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace PhoneBook.Models;
 
@@ -19,8 +18,16 @@ public partial class PhoneBookContext : DbContext
 
     public virtual DbSet<PhoneBookEntry> PhoneBookEntries { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
+	/// <Remarks>
+    /// Connection string is configured to a local instance of SQL express using windows certificate. 
+    /// I didn't need to change this for it to work for me. -DK
+    /// </Remarks>
+	/// <param name="optionsBuilder"></param>
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //=> optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=PhoneBook;Trusted_Connection=True;");
+
+	
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
