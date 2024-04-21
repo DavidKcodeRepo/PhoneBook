@@ -20,7 +20,7 @@ export class PhoneBookComponent implements OnInit {
 
   OpenEntryAddEditForm(): void {
     const dialogRef = this._dialog.open(EntryAddEditFormComponent, {
-      width: '400px',
+      width: '1200px',
     });
   }
 }

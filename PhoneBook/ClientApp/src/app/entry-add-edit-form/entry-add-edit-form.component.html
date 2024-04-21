@@ -1,6 +1,25 @@
-<div mat-dialog-title>Add/Change Entry</div>
-<div mat-dialog-content></div>
-<div mat-dialog-actions>
-  <button mat-raised-button>Cancel</button>
-  <button mat-raised-button color="primary">Save</button>
+<div mat-dialog-title>
+  Add/Change Entry
 </div>
+<form [formGroup]="phoneEntryForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field class="field" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field class="field" appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+      <mat-form-field class="field" appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber">
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button>Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </div>
+</form>

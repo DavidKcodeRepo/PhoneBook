@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EntryAddEditFormComponent } from './entry-add-edit-form.component';
 
 describe('EntryAddEditFormComponent', () => {

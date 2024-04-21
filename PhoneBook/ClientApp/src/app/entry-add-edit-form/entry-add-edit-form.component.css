@@ -1,0 +1,17 @@
+.content{
+    padding-top: 5px
+}
+
+.action{
+    padding: 0px 25px 20px
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.field {
+  flex: 1; 
+  margin-right: 10px;
+}

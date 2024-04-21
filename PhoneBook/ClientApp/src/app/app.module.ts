@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -11,7 +11,11 @@ import { PhoneBookComponent } from './phone-book/phone-book.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDialogModule } from '@angular/material/dialog'
+import { MatButtonModule } from '@angular/material/button'
 import { EntryAddEditFormComponent } from './entry-add-edit-form/entry-add-edit-form.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 @NgModule({
@@ -27,11 +31,15 @@ import { EntryAddEditFormComponent } from './entry-add-edit-form/entry-add-edit-
     HttpClientModule,
     FormsModule,
     MatDialogModule,
+    MatButtonModule,
+    MatInputModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'phone-book', component: PhoneBookComponent }
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
