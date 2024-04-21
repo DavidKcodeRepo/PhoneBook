@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace PhoneBook.Models;
 
 public partial class PhoneBookContext : DbContext
 {
+    private readonly IConfiguration _configuration;
     public PhoneBookContext()
-    {
-    }
+    { }
 
-    public PhoneBookContext(DbContextOptions<PhoneBookContext> options)
-        : base(options)
+    public PhoneBookContext(DbContextOptions<PhoneBookContext> options, IConfiguration configuration)
+	: base(options)
     {
-    }
+		_configuration = configuration;
+	}
 
     public virtual DbSet<PhoneBookEntry> PhoneBookEntries { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=PhoneBook;Trusted_Connection=True;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

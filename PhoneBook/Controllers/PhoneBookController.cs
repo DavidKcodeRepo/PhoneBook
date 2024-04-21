@@ -1,35 +1,87 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿namespace PhoneBook.Controllers;
+
+using Microsoft.AspNetCore.Mvc;
 using PhoneBook.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace PhoneBook.Controllers
+/// <summary>
+/// 
+/// </summary>
+[ApiController]
+[Route("[controller]")]
+public class PhoneBookController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class PhoneBookController : ControllerBase
-    {
-        public PhoneBookController()
-        {
-        }
+	private readonly PhoneBookContext _context;
+	public PhoneBookController(PhoneBookContext context)
+	{
+		_context = context;
+	}
 
-        [HttpGet]
-        public List<PhoneBookEntry> Get()
-        {
-            throw new NotImplementedException();
-        }
+	//GET: api/PhoneEntries
+	[HttpGet]
+	public async Task<ActionResult<IEnumerable<PhoneBookEntry>>> GetPhoneEntries()
+	{
+		return await _context.PhoneBookEntries.ToListAsync();
+	}
 
-        [HttpGet(template:"{id}")]
-        public PhoneBookEntry Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+	//Get: api/PhoneEntries/x
+	[HttpGet("{id}")]
+	public async Task<ActionResult<PhoneBookEntry>> GetPhoneEntry(int id)
+	{
+		var PhoneEntry = await _context.PhoneBookEntries.FindAsync(id);
 
-        [HttpPost]
-        public void Post([FromBody] PhoneBookEntry entry)
-        {
-            throw new NotImplementedException();
-        }
+		if (PhoneEntry == null) { return NotFound(); }
 
-        //[HttpPut(template:"{id}")]
-         
-    }
+		return PhoneEntry;
+	}
+
+	//PUT: api/PhoneEntires/5
+	[HttpPut("id")]
+	public async Task<IActionResult> PutPhoneEntry(int id, PhoneBookEntry phoneBookEntry)
+	{
+		if (id != phoneBookEntry.PhoneBookEntryId) { BadRequest(); }
+
+		_context.Entry(phoneBookEntry).State = EntityState.Modified;
+
+		try
+		{
+			await _context.SaveChangesAsync();
+		}
+		catch (DbUpdateConcurrencyException)
+		{
+			if (!PhoneBookEntryExists(id)) { return NotFound(); }
+			else { throw; }
+		}
+
+		return NoContent();
+	}
+
+	//POST: api/PhoneBookEntries/
+	[HttpPost]
+	public async Task<ActionResult<PhoneBookEntry>> PostPhoneEntry(PhoneBookEntry entry)
+	{
+		_context.PhoneBookEntries.Add(entry);
+		await _context.SaveChangesAsync();
+
+		return CreatedAtAction(nameof(PostPhoneEntry), new { id = entry.PhoneBookEntryId }, entry);
+	}
+
+	// DELETE: api/PhoneBookEntries/5
+	[HttpDelete("{id}")]
+	public async Task<IActionResult> DeletePhoneEntry(int id)
+	{
+		var entryToDelete = await _context.PhoneBookEntries.FindAsync(id);
+
+		if (entryToDelete == null) { return NotFound(); }
+
+		_context.PhoneBookEntries.Remove(entryToDelete);
+		await _context.SaveChangesAsync();
+
+		return NoContent();
+	}
+
+	private bool PhoneBookEntryExists(int id)
+	{
+		return _context.PhoneBookEntries.Any(x => x.PhoneBookEntryId == id);
+	}
 }

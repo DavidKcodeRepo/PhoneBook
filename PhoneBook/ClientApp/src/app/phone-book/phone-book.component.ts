@@ -14,6 +14,8 @@ interface PhoneEntry
   phoneNumber: string;
 }
 
+//This is the UI For the phone book, including a table of phone entires (first Name, last Name, Phone number),
+//buttons for updating and deleting records and a new entry button.
 @Component(
 {
   selector: 'app-phone-book',
