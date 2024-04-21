@@ -29,7 +29,7 @@ namespace PhoneBook.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpPut(template:"{id}")]
+        //[HttpPut(template:"{id}")]
          
     }
 }
