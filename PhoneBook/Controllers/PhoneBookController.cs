@@ -26,9 +26,10 @@ public class PhoneBookController : ControllerBase
 
 	//Get: api/PhoneEntries/x
 	[HttpGet("{id}")]
-	public async Task<ActionResult<PhoneBookEntry>> GetPhoneEntry(int id)
+	public async Task<ActionResult<PhoneBookEntry>> GetPhoneEntry(long id)
 	{
-		var PhoneEntry = await _context.PhoneBookEntries.FindAsync(id);
+		int parsedId = (int)id;
+		var PhoneEntry = await _context.PhoneBookEntries.FindAsync(parsedId);
 
 		if (PhoneEntry == null) { return NotFound(); }
 
@@ -37,9 +38,10 @@ public class PhoneBookController : ControllerBase
 
 	//PUT: api/PhoneEntires/5
 	[HttpPut("{id}")]
-	public async Task<IActionResult> PutPhoneEntry(int id, PhoneBookEntry phoneBookEntry)
+	public async Task<IActionResult> PutPhoneEntry(long id, PhoneBookEntry phoneBookEntry)
 	{
-		if (id != phoneBookEntry.PhoneBookEntryId) { BadRequest(); }
+		int parsedId = (int)id;
+		if (parsedId != phoneBookEntry.PhoneBookEntryId) { BadRequest(); }
 
 		_context.Entry(phoneBookEntry).State = EntityState.Modified;
 
@@ -49,7 +51,7 @@ public class PhoneBookController : ControllerBase
 		}
 		catch (DbUpdateConcurrencyException)
 		{
-			if (!PhoneBookEntryExists(id)) { return NotFound(); }
+			if (!PhoneBookEntryExists(parsedId)) { return NotFound(); }
 			else { throw; }
 		}
 
@@ -62,15 +64,15 @@ public class PhoneBookController : ControllerBase
 	{
 		_context.PhoneBookEntries.Add(entry);
 		await _context.SaveChangesAsync();
-
 		return CreatedAtAction(nameof(PostPhoneEntry), new { id = entry.PhoneBookEntryId }, entry);
 	}
 
 	// DELETE: api/PhoneBookEntries/5
 	[HttpDelete("{id}")]
-	public async Task<IActionResult> DeletePhoneEntry(int id)
+	public async Task<IActionResult> DeletePhoneEntry(long id)
 	{
-		var entryToDelete = await _context.PhoneBookEntries.FindAsync(id);
+		int parsedId = (int)id;
+		var entryToDelete = await _context.PhoneBookEntries.FindAsync(parsedId);
 
 		if (entryToDelete == null) { return NotFound(); }
 
