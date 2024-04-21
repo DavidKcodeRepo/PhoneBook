@@ -16,5 +16,20 @@ namespace PhoneBook.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpGet(template:"{id}")]
+        public PhoneBookEntry Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public void Post([FromBody] PhoneBookEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut(template:"{id}")]
+         
     }
 }
