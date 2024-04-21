@@ -5,9 +5,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-
 import { HomeComponent } from './home/home.component';
 import { PhoneBookComponent } from './phone-book/phone-book.component';
+import { NotesComponent } from './notes/notes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
@@ -25,7 +25,8 @@ import { MatIconModule} from '@angular/material/icon';
     NavMenuComponent,
     EntryAddEditFormComponent,
     PhoneBookComponent,
-    HomeComponent
+    HomeComponent,
+    NotesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,7 +39,8 @@ import { MatIconModule} from '@angular/material/icon';
     MatTableModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'phone-book', component: PhoneBookComponent }
+      { path: 'phone-book', component: PhoneBookComponent },
+      { path: 'notes', component: NotesComponent }
     ]),
     BrowserAnimationsModule,
     MatFormFieldModule,

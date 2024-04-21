@@ -9,8 +9,8 @@ import { MatTableDataSource } from '@angular/material/table';
 interface PhoneEntry
 {
   id: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  surname: string;
   phoneNumber: string;
 }
 
