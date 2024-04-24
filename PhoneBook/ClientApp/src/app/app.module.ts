@@ -17,36 +17,38 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule} from '@angular/material/icon';
 
-
-
 @NgModule({
   declarations: [
-    AppComponent,
-    NavMenuComponent,
-    EntryAddEditFormComponent,
-    PhoneBookComponent,
-    HomeComponent,
-    NotesComponent
+    //Core
+    AppComponent, 
+    //Harbour Assist
+    NavMenuComponent, // NavBar provided by reviewer
+    HomeComponent, // Briefing page by revier
+    //DK
+    PhoneBookComponent, // App main page
+    EntryAddEditFormComponent, //Form for adding/updating entries
+    NotesComponent // Developer notes and review messages
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatTableModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'phone-book', component: PhoneBookComponent },
       { path: 'notes', component: NotesComponent }
     ]),
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    HttpClientModule,
     BrowserAnimationsModule,
+    //Forms
+    FormsModule,
+    ReactiveFormsModule, 
+    //Material UI modules:
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatTableModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
