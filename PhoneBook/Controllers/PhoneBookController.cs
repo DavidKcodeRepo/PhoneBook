@@ -68,9 +68,16 @@ public class PhoneBookController : ControllerBase
 	[HttpPost]
 	public async Task<ActionResult<PhoneBookEntry>> PostPhoneEntry(PhoneBookEntry entry)
 	{
-		_context.PhoneBookEntries.Add(entry);
+		var newEntry = new PhoneBookEntry
+		{
+			Firstname = entry.Firstname,
+			Surname = entry.Surname,
+			PhoneNumber = entry.PhoneNumber
+			// You can add other properties as needed
+		};
+		_context.PhoneBookEntries.Add(newEntry);
 		await _context.SaveChangesAsync();
-		return CreatedAtAction(nameof(PostPhoneEntry), new { id = entry.PhoneBookEntryId }, entry);
+		return CreatedAtAction(nameof(PostPhoneEntry), new { id = entry.PhoneBookEntryId }, newEntry);
 	}
 
 	// DELETE: api/PhoneBookEntries/5

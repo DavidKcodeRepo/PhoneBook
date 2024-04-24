@@ -67,6 +67,7 @@ export class EntryAddEditFormComponent implements OnInit
       else
       //this is a create new entry
       {
+        this.phoneEntryForm.value.phoneBookEntryId = 0;
         this._phoneEntryService.addPhoneEntry(this.phoneEntryForm.value).subscribe(
           {
             next: (val: any) => {
